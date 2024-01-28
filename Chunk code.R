@@ -48,8 +48,25 @@ kable(Demanda) %>%
 }
 
 
+#Graficas y modificacion de datos
+{
+Demanda <- Demanda %>% gather(key="Movimiento",value = "Cantidad",-Precio)
 
 
-
-
-
+ggplot(Demanda, aes(x = Cantidad, y = Precio, group = Movimiento)) +
+  geom_line(aes(color = Movimiento, linetype = Movimiento), size = 1.5) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  theme_classic() +
+  labs(title = "Gráfica 9: Bonos a 10 años",
+       subtitle = "Variación % diaria",
+       x = "Fecha", y = "Porcentaje",
+       caption = "Fuente: Elaboración propia con datos del Investing") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+        plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  scale_color_manual(values = c("blue", "orange", "green", "purple", "red")) +
+  scale_linetype_manual(values = c("solid", "solid", "solid", "dashed", "dashed"))
+}
+  
+  
