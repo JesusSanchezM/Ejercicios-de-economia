@@ -12,7 +12,18 @@ Precio <- c(10, 20, 30, 40, 50, 60)
 Cantidad <- c(100, 90, 80, 70, 60, 50)
 Demanda <- data.frame(Precio, Cantidad)
 
-ggplot() + geom_line(aes(x=Cantidad, y=Precio), color="black") + theme_classic()
+ggplot() + 
+  geom_line(aes(x=Cantidad, y=Precio), color="black") + 
+  theme_classic()
+
+Incremento_Bien_normal <- c()
+Incremento_Bien_inferior <- c()
+Decremento_Bien_normal <- c()
+Decremento_Bien_inferior <- c()
+
+Demanda <- data.frame(Precio, Cantidad, Incremento_Bien_normal,
+                      Incremento_Bien_inferior, Decremento_Bien_normal,
+                      Decremento_Bien_inferior)
 
 formattable(Demanda, list(
   Cantidad = color_tile("white", "orange")),
