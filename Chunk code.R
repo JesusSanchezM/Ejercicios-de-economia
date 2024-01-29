@@ -70,3 +70,12 @@ ggplot(Demanda, aes(x = Cantidad, y = Precio, group = Movimiento)) +
 }
   
   
+df <- data.frame(x = rnorm(100),
+                 y = rnorm(100))
+
+ggplot(df, aes(x = x, y = y)) +
+  geom_point() +
+  geom_segment(x = -3, y = 3,
+               xend = 1, yend = -1,
+               color = 2,
+               arrow = arrow(), size=1.5)

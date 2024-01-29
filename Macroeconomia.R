@@ -160,6 +160,10 @@ ggplot(Demanda_3, aes(x = Cantidad_original, y = Precio, group = `Ocurre un...`)
   scale_color_manual(values = c("blue","gold", "hotpink")) +
   scale_linetype_manual(values = c("solid", "solid", "solid"))
 
+kable(Demanda) %>% 
+  kable_styling("striped", full_width = F) %>% 
+  row_spec(1:6, bold=F, background = "steelblue") %>% 
+  column_spec(1, bold=T, background = "white") 
  
 }
 
