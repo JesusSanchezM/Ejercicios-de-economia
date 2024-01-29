@@ -6,7 +6,17 @@ library(tidyverse)
 
 #Actividad 1 
 {
-#`Ocurre un...`s en la demanda y la oferta
+#3. Represente gráficamente los movimientos de la demanda y de la oferta (según sea el caso) bajo cada uno de los escenarios siguientes:
+# a) Incremento en el ingreso: x es un bien normal
+# b) Incremento en el ingreso: x es un bien inferior
+# c) Decremento en el ingreso: x es un bien normal
+# d) Decremento en el ingreso: x es un bien inferior
+# e) Incremento en el precio de un bien sustituto de x
+# f) Incremento en el precio de un bien complementario de x
+# g) Decremento en el precio de un bien sustituto de x
+# h) Decremento en el precio de un bien complementario de x
+# i) Incremento en el costo de producción de x
+# j) Decremento en el costo de producción de x
 
 Precio <- c(10, 20, 30, 40, 50, 60)
 Cantidad_original <- c(100, 90, 80, 70, 60, 50)
@@ -35,6 +45,14 @@ Demanda_1 <- Demanda %>% gather(key="Ocurre un...",value = "Cantidad_original",-
 
 ggplot(Demanda_1, aes(x = Cantidad_original, y = Precio, group = `Ocurre un...`)) +
   geom_line(aes(color = `Ocurre un...`, linetype = `Ocurre un...`), size = 1.5) +
+  geom_segment(x = 60, y = 50,
+               xend = 56, yend = 46,
+               color = "steelblue",
+               arrow = arrow(), size=1.5)+
+  geom_segment(x = 80, y = 30,
+               xend = 84, yend = 34,
+               color = "steelblue",
+               arrow = arrow(), size=1.5)+
   theme(axis.text.x = element_text(angle = 90)) +
   theme_classic() +
   labs(title = "Movimientos en la demanda",
@@ -75,6 +93,14 @@ Demanda_2 <- Demanda %>% gather(key="Ocurre un...",value = "Cantidad_original",-
 
 ggplot(Demanda_2, aes(x = Cantidad_original, y = Precio, group = `Ocurre un...`)) +
   geom_line(aes(color = `Ocurre un...`, linetype = `Ocurre un...`), size = 1.5) +
+  geom_segment(x = 60, y = 50,
+               xend = 56, yend = 46,
+               color = "red",
+               arrow = arrow(), size=1.5)+
+  geom_segment(x = 80, y = 30,
+               xend = 84, yend = 34,
+               color = "red",
+               arrow = arrow(), size=1.5)+
   theme(axis.text.x = element_text(angle = 90)) +
   theme_classic() +
   labs(title = "Movimientos en la demanda",
@@ -97,6 +123,43 @@ kable(Demanda) %>%
   
 }
 
+# Gráficas incisos i) al j)
+{
 
+Cantidad_original <- c(50,60,70,80,90,100) 
+    
+Incremento_costo_de_produccion <- Cantidad_original-10
+Decremento_costo_de_produccion <- Cantidad_original+10  
+ 
+Demanda <- data.frame(Precio, Cantidad_original, 
+                      Incremento_costo_de_produccion,
+                      Decremento_costo_de_produccion)
 
+Demanda_3 <- Demanda %>% gather(key="Ocurre un...",value = "Cantidad_original",-Precio)
+
+ggplot(Demanda_3, aes(x = Cantidad_original, y = Precio, group = `Ocurre un...`)) +
+  geom_line(aes(color = `Ocurre un...`, linetype = `Ocurre un...`), size = 1.5) +
+  geom_segment(x = 88, y = 50,
+               xend = 83, yend = 50,
+               color = "magenta",
+               arrow = arrow(), size=1.5)+
+  geom_segment(x = 63, y = 20,
+               xend = 68, yend = 20,
+               color = "magenta",
+               arrow = arrow(), size=1.5)+
+  theme(axis.text.x = element_text(angle = 90)) +
+  theme_classic() +
+  labs(title = "Movimientos en la oferta",
+       subtitle = "Variación por unidad",
+       x = "Cantidad", y = "Precio",
+       caption = "Fuente: Elaboración propia con datos propios") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+        plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) +
+  scale_color_manual(values = c("blue","gold", "hotpink")) +
+  scale_linetype_manual(values = c("solid", "solid", "solid"))
+
+ 
+}
 
