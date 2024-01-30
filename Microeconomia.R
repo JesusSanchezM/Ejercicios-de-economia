@@ -3,6 +3,7 @@
 #-----------------------------
 
 library(tidyverse)
+library(kableExtra)
 
 #Actividad 1 
 {
@@ -31,14 +32,14 @@ ggplot() +
 # Gráficas incisos a) al d)
 {
   
-Incremento_Bien_normal <- Cantidad_original+10
-Incremento_Bien_inferior <- Cantidad_original-10
-Decremento_Bien_normal <- Incremento_Bien_inferior
-Decremento_Bien_inferior <- Incremento_Bien_normal
+Incremento_ingreso_Bien_normal <- Cantidad_original+10
+Incremento_ingreso_Bien_inferior <- Cantidad_original-10
+Decremento_ingreso_Bien_normal <- Incremento_ingreso_Bien_inferior
+Decremento_ingreso_Bien_inferior <- Incremento_ingreso_Bien_normal
 
-Demanda <- data.frame(Precio, Cantidad_original, Incremento_Bien_normal,
-                      Incremento_Bien_inferior, Decremento_Bien_normal,
-                      Decremento_Bien_inferior)
+Demanda <- data.frame(Precio, Cantidad_original, Incremento_ingreso_Bien_normal,
+                      Incremento_ingreso_Bien_inferior, Decremento_ingreso_Bien_normal,
+                      Decremento_ingreso_Bien_inferior)
     
 Demanda_1 <- Demanda %>% gather(key="Ocurre un...",value = "Cantidad_original",-Precio)
 
