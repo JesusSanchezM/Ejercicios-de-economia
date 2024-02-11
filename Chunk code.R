@@ -79,3 +79,33 @@ ggplot(df, aes(x = x, y = y)) +
                xend = 1, yend = -1,
                color = 2,
                arrow = arrow(), size=1.5)
+
+
+x <- c(1:10)
+y <- c(1:10)
+df <- data.frame(x, y)
+
+p1 <- ggplot(df) + 
+  geom_line(aes(x = x, y = y), color="white") +
+  scale_x_continuous(breaks = seq(1, 10, 1)) +
+  scale_y_continuous(breaks = seq(1, 10, 1)) +
+  geom_segment(x = 3, y = 9,
+               xend = 3, yend = 3,
+               color = "black", size=1)+
+  geom_segment(x = 3, y = 3,
+               xend = 9, yend = 3,
+               color = "black", size=1) +
+  labs(x = "Guante derecho", y = "Guante izquierdo") +  # Cambia los nombres de los ejes
+  theme_classic()
+
+
+library(patchwork)
+
+# Combinamos los gráficos
+p1 + p1  
+  plot_annotation(title = 'Título para todos los gráficos',
+                                          subtitle = "Subtítulo",
+                                          caption = "Pie del gráfico")
+  plot_layout(ncol = 2) 
+
+

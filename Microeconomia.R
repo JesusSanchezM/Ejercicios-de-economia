@@ -3,7 +3,9 @@
 #-----------------------------
 
 library(tidyverse)
-library(kableExtra)
+library(kableExtra) #tablas estilizadas
+library(patchwork) #Combinar graficos
+
 
 #Actividad 1 
 {
@@ -168,3 +170,62 @@ kable(Demanda) %>%
  
 }
 
+
+#Actividad 3
+{
+# 3. Considere los bienes siguientes:
+# a.	Guante derecho
+# b.	Moscas por día
+# c.	Refresco Coca-Cola
+# d.	Refresco Pepsi-Cola
+# e.	Betabel
+# f.	Alimentos por día
+# g.	Guante izquierdo
+# h.	Zanahorias
+# con la información anterior, forme distintas cestas de consumo (de dos bienes) que puedan representar gráficamente las preferencias de:
+# I.	complementarios perfectos
+# II.	sustitutos perfectos
+# III.	un mal
+# IV.	un neutral
+
+
+x <- c(1:10)
+y <- c(1:10)
+df <- data.frame(x, y)
+}
+
+#Bienes complementarios
+{
+p1 <-ggplot(df) + 
+  geom_line(aes(x = x, y = y), color="white") +
+  scale_x_continuous(breaks = seq(1, 10, 1)) +
+  scale_y_continuous(breaks = seq(1, 10, 1)) +
+  geom_segment(x = 3, y = 9,
+               xend = 3, yend = 3,
+               color = "black", size=1)+
+  geom_segment(x = 3, y = 3,
+               xend = 9, yend = 3,
+               color = "black", size=1) +  # Cambia los nombres de los ejes
+  theme_classic()+
+    labs(title = "Bienes complementarios",
+         subtitle = "Guante derecho y guante izquierdo",
+         x = "Guante derecho", y = "Guante izquierdo",
+         caption = "Fuente: Elaboración propia con datos propios") +
+    theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+          plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+          plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+          axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+
+}
+
+
+
+#Combinar gráficas
+{
+p1 + p1  
+plot_annotation(title = 'Título para todos los gráficos',
+                subtitle = "Subtítulo",
+                caption = "Pie del gráfico")
+plot_layout(ncol = 2) 
+
+}
