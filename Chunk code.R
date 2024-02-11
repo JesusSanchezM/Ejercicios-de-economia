@@ -102,7 +102,7 @@ p1 <- ggplot(df) +
 library(patchwork)
 
 # Combinamos los gráficos
-p1 + p1  
+p1 + p2
   plot_annotation(title = 'Título para todos los gráficos',
                                           subtitle = "Subtítulo",
                                           caption = "Pie del gráfico")

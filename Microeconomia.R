@@ -207,25 +207,86 @@ p1 <-ggplot(df) +
                xend = 9, yend = 3,
                color = "black", size=1) +  # Cambia los nombres de los ejes
   theme_classic()+
-    labs(title = "Bienes complementarios",
-         subtitle = "Guante derecho y guante izquierdo",
+    labs(title = "Complementarios perfectos",
+         subtitle = "",
          x = "Guante derecho", y = "Guante izquierdo",
-         caption = "Fuente: Elaboración propia con datos propios") +
+         caption = "") +
     theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
           plot.caption = element_text(hjust = 0, face = "bold", size = 10),
           plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
           axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+}
+
+#Bienes sustitutos
+{
+p2 <- ggplot(df) + 
+  geom_line(aes(x = x, y = y), color="white") +
+  scale_x_continuous(breaks = seq(1, 10, 1)) +
+  scale_y_continuous(breaks = seq(1, 10, 1)) +
+  geom_segment(x = 0, y = 8,
+               xend = 8, yend = 0,
+               color = "black", size=1)+
+  theme_classic()+
+  labs(title = "Sustitutos perfectos",
+       subtitle = "",
+       x = "Refresco Coca Cola", y = "Refresco Pepsi",
+       caption = "") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+        plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+  
+}
+
+#Bienes, un mal
+
+{
+p3 <- ggplot(df) + 
+  geom_line(aes(x = x, y = y), color="white") +
+  scale_x_continuous(breaks = seq(1, 10, 1)) +
+  scale_y_continuous(breaks = seq(1, 10, 1)) +
+  geom_segment(x = 0, y = 3,
+               xend = 7, yend = 8,
+               color = "black", size=1)+
+  theme_classic()+
+  labs(title = "Un mal",
+       subtitle = "",
+       x = "Alimento por día", y = "Moscas por día",
+       caption = "") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+        plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
 
 }
 
+#Bienes neutrales
+{
+p4 <- ggplot(df) + 
+  geom_line(aes(x = x, y = y), color="white") +
+  scale_x_continuous(breaks = seq(1, 10, 1)) +
+  scale_y_continuous(breaks = seq(1, 10, 1)) +
+  geom_segment(x = 5, y = 9,
+               xend = 5, yend = 0,
+               color = "black", size=1)+
+  theme_classic()+
+  labs(title = "Un neutral",
+       subtitle = "",
+       x = "Betabel", y = "Zanahoria",
+       caption = "") +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+        plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
 
+}
 
 #Combinar gráficas
 {
-p1 + p1  
-plot_annotation(title = 'Título para todos los gráficos',
-                subtitle = "Subtítulo",
-                caption = "Pie del gráfico")
-plot_layout(ncol = 2) 
+(p1 + p2) / (p3 + p4)
+  plot_annotation(title = '',
+                subtitle = "",
+                caption = "Fuente: Elaboración propia con datos propios")
+  plot_layout(ncol = 2) 
 
 }
