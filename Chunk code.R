@@ -81,7 +81,7 @@ ggplot(df, aes(x = x, y = y)) +
                arrow = arrow(), size=1.5)
 
 
-x <- c(1:10)
+x <- c()
 y <- c(1:10)
 df <- data.frame(x, y)
 
@@ -108,4 +108,4 @@ p1 + p2
                                           caption = "Pie del gráfico")
   plot_layout(ncol = 2) 
 
-
+  

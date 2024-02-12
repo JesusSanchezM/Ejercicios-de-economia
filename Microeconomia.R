@@ -283,10 +283,52 @@ p4 <- ggplot(df) +
 
 #Combinar gráficas
 {
-(p1 + p2) / (p3 + p4)
+(p1 + p2)
   plot_annotation(title = '',
                 subtitle = "",
                 caption = "Fuente: Elaboración propia con datos propios")
   plot_layout(ncol = 2) 
+  
+(p3 + p4)
+  plot_annotation(title = '',
+                  subtitle = "",
+                  caption = "Fuente: Elaboración propia con datos propios")
+  plot_layout(ncol = 2) 
 
 }
+
+#Restricción presupuestaria y curva de indiferencia
+{
+# Crea un dataframe con valores para x
+df1 <- data.frame(x = c(0, 20), y= c(80, 0))
+df <- data.frame(x = c(5:20))
+df$y <- (400/df$x)
+
+# Grafica la restricción presupuestaria
+
+ggplot() +
+  geom_line(data=df1, aes(x, y), size=1) +
+  geom_line(data=df, aes(x, y), size=1) +
+  geom_point(aes(x = 20, y = 0), color = "red", size = 5) +  # Punto para 20 manzanas
+  geom_point(aes(x = 0, y = 80), color = "blue", size = 5) +  # Punto para 80 naranjas
+  geom_point(aes(x = 10, y = 40), color = "green", size = 5) +  # Punto después de comprar 10 manzanas
+  geom_point(aes(x = 9, y = 44), color = "purple", size = 5) + 
+  geom_point(aes(x = 5, y = 80), color = "blue", size = 5) +  # Punto para 80 naranjas
+  geom_point(aes(x = 10, y = 40), color = "green", size = 5) +  # Punto después de comprar 10 manzanas
+  geom_point(aes(x = 20, y = 20), color = "purple", size = 5) + 
+  geom_hline(yintercept = 0, linetype = "dashed") +  # Línea horizontal para y=0
+  geom_vline(xintercept = 0, linetype = "dashed") +  # Línea vertical para x=0
+  labs(title = "Restricción Presupuestaria y curva de indiferencia",
+       x = "Manzanas (x)",
+       y = "Naranjas (y)") +
+  theme_classic()
+}
+
+
+
+
+
+
+
+
+
