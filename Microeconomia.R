@@ -9,6 +9,7 @@ library(patchwork) #Combinar graficos
 
 #Actividad 1 
 {
+{
 #3. Represente gráficamente los movimientos de la demanda y de la oferta (según sea el caso) bajo cada uno de los escenarios siguientes:
 # a) Incremento en el ingreso: x es un bien normal
 # b) Incremento en el ingreso: x es un bien inferior
@@ -169,9 +170,10 @@ kable(Demanda) %>%
   column_spec(1, bold=T, background = "white") 
  
 }
-
+}
 
 #Actividad 3
+{
 {
 # 3. Considere los bienes siguientes:
 # a.	Guante derecho
@@ -323,10 +325,108 @@ ggplot() +
        y = "Naranjas (y)") +
   theme_classic()
 }
+}
+  
+#Actividad 4 
+{
+#Curvas de indiferencia preferencias: 
+#Regulares 
+{
+# Crea un dataframe con valores para x
+df <- data.frame(x = c(1:10))
+df$y <- (10/df$x)
+df1 <- data.frame(x = c(1:20))
+df1$y <- (20/df1$x)
 
+# Grafica la restricción presupuestaria
+p1 <- ggplot() +
+  geom_line(data=df, aes(x, y), size=1) +
+  geom_line(data=df1, aes(x, y), size=1) +
+  geom_point(aes(x = 1, y = 10), color = "red", size = 5) + 
+  geom_point(aes(x = 2, y = 5), color = "blue", size = 5) +  
+  geom_point(aes(x = 4, y = 2.5), color = "green", size = 5) + 
+  geom_point(aes(x = 5, y = 2), color = "purple", size = 5) +
+  #2ndos puntos 
+  geom_point(aes(x = 1, y = 20), color = "red", size = 5) +  
+  geom_point(aes(x = 2, y = 10), color = "blue", size = 5) +  
+  geom_point(aes(x = 4, y = 5), color = "green", size = 5) + 
+  geom_point(aes(x = 5, y = 4), color = "purple", size = 5) +   
+  geom_hline(yintercept = 0, linetype = "dashed") +  # Línea horizontal para y=0
+  geom_vline(xintercept = 0, linetype = "dashed") +  # Línea vertical para x=0
+  labs(title = "Curva de indiferencia preferencias regulares (1)",
+       subtitle= expression("Función de utilidad =" ~ u == x[1] * x[2]),
+       x = expression(x[1]),
+       y = expression(x[2])) +
+  annotate("text", x = 10, y = 0.5, label = expression(10 == x[1] * x[2] ), color = "black", size = 5) +
+  annotate("text", x = 18, y = 0.5, label = expression(20 == x[1] * x[2] ), color = "black", size = 5) +
+  theme_classic()
+}
 
+#Regulares
+{
+  # Crea un dataframe con valores para x
+  df$a <- (sqrt(10/df$x))
+  df1$a <- (sqrt(20/df1$x))
+  
+  # Grafica la restricción presupuestaria
+  
+p2 <-  ggplot() +
+    geom_line(data=df, aes(x, a), size=1) +
+    geom_line(data=df1, aes(x, a), size=1) +
+    geom_point(aes(x = 1, y = 3.16), color = "red", size = 5) + 
+    geom_point(aes(x = 2, y = 2.23), color = "blue", size = 5) +  
+    geom_point(aes(x = 4, y = 1.58), color = "green", size = 5) + 
+    geom_point(aes(x = 5, y = 1.41), color = "purple", size = 5) +
+    #2ndos puntos 
+    geom_point(aes(x = 1, y = 4.47), color = "red", size = 5) +  
+    geom_point(aes(x = 2, y = 3.16), color = "blue", size = 5) +  
+    geom_point(aes(x = 4, y = 2.23), color = "green", size = 5) + 
+    geom_point(aes(x = 5, y = 2), color = "purple", size = 5) +   
+    geom_hline(yintercept = 0, linetype = "dashed") +  # Línea horizontal para y=0
+    geom_vline(xintercept = 0, linetype = "dashed") +  # Línea vertical para x=0
+    labs(title = "Curva de indiferencia preferencias regulares (2)",
+         subtitle= expression("Función de utilidad =" ~ u == x[1] * x[2]^2),
+         x = expression(x[1]),
+         y = expression(x[2])) +
+    annotate("text", x = 10, y = 0.7, label = expression(10 == x[1] * x[2]^2 ), color = "black", size = 5) +
+    annotate("text", x = 18, y = 0.7, label = expression(20 == x[1] * x[2]^2 ), color = "black", size = 5) +
+    theme_classic()
+}
 
+#Sustitutos perfectos
+{
+  # Crea un dataframe con valores para x
+  df$b <- (10-(2*df$x))
+  df1$b <- (20-(2*df1$x))
+  
+  # Grafica la restricción presupuestaria
+  
 
+p3 <- ggplot() +
+    geom_line(data=filter(df, b>=0), aes(x, b), size=1) +
+    geom_line(data=filter(df1, b>=0), aes(x, b), size=1) +
+    geom_point(aes(x = 1, y = 8), color = "red", size = 5) + 
+    geom_point(aes(x = 2, y = 6), color = "blue", size = 5) +  
+    geom_point(aes(x = 4, y = 2), color = "green", size = 5) + 
+    geom_point(aes(x = 5, y = 0), color = "purple", size = 5) +
+    #2ndos puntos 
+    geom_point(aes(x = 1, y = 18), color = "red", size = 5) +  
+    geom_point(aes(x = 2, y = 16), color = "blue", size = 5) +  
+    geom_point(aes(x = 4, y = 12), color = "green", size = 5) + 
+    geom_point(aes(x = 5, y = 10), color = "purple", size = 5) +   
+    geom_hline(yintercept = 0, linetype = "dashed") +  # Línea horizontal para y=0
+    geom_vline(xintercept = 0, linetype = "dashed") +  # Línea vertical para x=0
+    labs(title = "Curva de indiferencia preferencias por sustitutos perfectos (3)",
+         subtitle= expression("Función de utilidad =" ~ u == 2*x[1] + x[2]),
+         x = expression(x[1]),
+         y = expression(x[2])) +
+    annotate("text", x = 5.5, y = 1.6, label = expression(10 == 2*x[1] + x[2] ), color = "black", size = 3.5) +
+    annotate("text", x = 9.3, y = 4, label = expression(20 == 2*x[1] + x[2] ), color = "black", size = 3.5) +
+    theme_classic()
+}
+
+p1 + p2 / p3
+}
 
 
 
