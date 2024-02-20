@@ -357,9 +357,10 @@ p1 <- ggplot() +
        subtitle= expression("Función de utilidad =" ~ u == x[1] * x[2]),
        x = expression(x[1]),
        y = expression(x[2])) +
-  annotate("text", x = 10, y = 0.5, label = expression(10 == x[1] * x[2] ), color = "black", size = 5) +
-  annotate("text", x = 18, y = 0.5, label = expression(20 == x[1] * x[2] ), color = "black", size = 5) +
+  annotate("text", x = 10, y = 0.5, label = expression(x[2] == 10/x[1]), color = "black", size = 5) +
+  annotate("text", x = 18, y = 0.5, label = expression(x[2] == 20/x[1]), color = "black", size = 5) +
   theme_classic()
+p1
 }
 
 #Regulares
@@ -388,9 +389,10 @@ p2 <-  ggplot() +
          subtitle= expression("Función de utilidad =" ~ u == x[1] * x[2]^2),
          x = expression(x[1]),
          y = expression(x[2])) +
-    annotate("text", x = 10, y = 0.7, label = expression(10 == x[1] * x[2]^2 ), color = "black", size = 5) +
-    annotate("text", x = 18, y = 0.7, label = expression(20 == x[1] * x[2]^2 ), color = "black", size = 5) +
+    annotate("text", x = 10, y = 0.5, label = expression(x[2] == sqrt(10/x[1]) ), color = "black", size = 4) +
+    annotate("text", x = 18, y = 0.5, label = expression(x[2] == sqrt(20/x[1])  ), color = "black", size = 4) +
     theme_classic()
+p2
 }
 
 #Sustitutos perfectos
@@ -420,9 +422,10 @@ p3 <- ggplot() +
          subtitle= expression("Función de utilidad =" ~ u == 2*x[1] + x[2]),
          x = expression(x[1]),
          y = expression(x[2])) +
-    annotate("text", x = 5.5, y = 1.6, label = expression(10 == 2*x[1] + x[2] ), color = "black", size = 3.5) +
-    annotate("text", x = 9.3, y = 4, label = expression(20 == 2*x[1] + x[2] ), color = "black", size = 3.5) +
+    annotate("text", x = 5.5, y = 1.6, label = expression(x[2] == 10-2*x[1]), color = "black", size = 3.5) +
+    annotate("text", x = 9.3, y = 4, label = expression(x[2] == 20-2*x[1]), color = "black", size = 3.5) +
     theme_classic()
+p3
 }
 
 p1 + p2 / p3
