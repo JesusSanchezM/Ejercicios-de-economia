@@ -433,6 +433,8 @@ p1 + p2 / p3
 
 #Actividad 5
 {
+  {
+  #Esta actividad se centra en graficar la curva de oferta-renta y la curva de engel
   #funcion u=(x1)^2(x2)
   # restriccion presupuestaria p1x1+p2x2=m
   
@@ -474,7 +476,7 @@ p1 + p2 / p3
               color = "orange", size=2)+
     labs(
       title = "Curva de oferta-renta",
-      subtitle = expression("Función de utilidad =" ~ u == x[1] * x[2]),
+      subtitle = expression("Función de utilidad:" ~ u == x[1] * x[2]),
       x = "Bien 1",
       y = "Bien 2",
       caption = "Los precios se establecieron en p1= 10 y p2=20. 
@@ -499,13 +501,144 @@ p1 + p2 / p3
     geom_line(color = "blue", size = 2) +
     labs(
       title = "Curva de Engel",
+      subtitle = expression("Función:" ~ m==10000*e^(0.05*x[1])),
       x = "Bien 1",
       y = "Renta"
-    ) +
-    theme_minimal() + theme_classic()
+    ) + theme_classic()
   
   p1+p2
-
+  }
+  {#Esta segunda actividad representa la curva de oferta renta y la curva de engel para bienes sustitutos perfectos y complementarios perfectos
+  
+    p1 <- ggplot(df) + 
+      geom_line(aes(x = x, y = x), color="white") +
+      scale_x_continuous(breaks = seq(1, 10, 1)) +
+      scale_y_continuous(breaks = seq(1, 10, 1)) +
+      geom_segment(x = 0, y = 8,
+                   xend = 8, yend = 0,
+                   color = "black", size=1)+
+      geom_segment(x = 0, y = 6,
+                   xend = 6, yend = 0,
+                   color = "black", size=1)+
+      geom_segment(x = 0, y = 10,
+                   xend = 10, yend = 0,
+                   color = "black", size=1)+
+      geom_segment(x = 0, y = 6,
+                   xend = 8.2, yend = 0,
+                   color = "blue", size=1)+
+      geom_segment(x = 0, y = 4,
+                   xend = 6.2, yend = 0,
+                   color = "blue", size=1)+
+      geom_segment(x = 0, y = 8,
+                   xend = 10.2, yend = 0,
+                   color = "blue", size=1)+
+      geom_segment(x = 0, y = 0.5,
+                   xend = 10, yend = 0.5,
+                   color = "orange", size=3)+
+      theme_classic()+
+      labs(title = "Sustitutos perfectos",
+           subtitle = "Curva de oferta-renta",
+           x = "Bien 1", y = "Bien 2",
+           caption = "") +
+      theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+            plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+            plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+    
+    p1
+    
+    p2 <- ggplot(df) + 
+      geom_line(aes(x = x, y = y), color="white") +
+      scale_x_continuous(breaks = seq(1, 10, 1)) +
+      scale_y_continuous(breaks = seq(1, 10, 1)) +
+      geom_segment(x = 4, y = 9,
+                   xend = 4, yend = 4,
+                   color = "black", size=1)+
+      geom_segment(x = 4, y = 4,
+                   xend = 9, yend = 4,
+                   color = "black", size=1) +  # Cambia los nombres de los ejes
+      geom_segment(x = 2, y = 9,
+                   xend = 2, yend = 2,
+                   color = "black", size=1)+
+      geom_segment(x = 2, y = 2,
+                   xend = 9, yend = 2,
+                   color = "black", size=1)+
+      geom_segment(x = 6, y = 9,
+                   xend = 6, yend = 6,
+                   color = "black", size=1)+
+      geom_segment(x = 6, y = 6,
+                   xend = 9, yend = 6,
+                   color = "black", size=1)+
+      geom_segment(x = 4, y = 0,
+                   xend = 0, yend = 4,
+                   color = "blue", size=1)+
+      geom_segment(x = 8, y = 0,
+                   xend = 0, yend = 8,
+                   color = "blue", size=1)+
+    geom_segment(x = 12, y = 0,
+                 xend = 0, yend = 12,
+                 color = "blue", size=1)+
+      geom_segment(x = 2, y = 2,
+                   xend = 6, yend = 6,
+                   color = "orange", size=1)+
+      theme_classic()+
+      labs(title = "Complementarios perfectos",
+           subtitle = "Curva de oferta-renta",
+           x = "Bien 1", y = "Bien 2",
+           caption = "") +
+      theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+            plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+            plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1)) 
+    
+    p1+p2
+    
+    p3 <- ggplot(df) + 
+      geom_line(aes(x = x, y = x), color="white") +
+      scale_x_continuous(breaks = seq(1, 10, 1)) +
+      scale_y_continuous(breaks = seq(1, 10, 1)) +
+      geom_segment(x = 0, y = 0,
+                   xend = 10, yend = 10,
+                   color = "salmon", size=1)+
+      theme_classic()+
+      labs(title = "Sustitutos perfectos",
+           subtitle = "Curva de Engel",
+           x = "Bien 1", y = "Bien 2",
+           caption = "") +
+      theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+            plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+            plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+    
+    p4 <- ggplot(df) + 
+      geom_line(aes(x = x, y = x), color="white") +
+      scale_x_continuous(breaks = seq(1, 10, 1)) +
+      scale_y_continuous(breaks = seq(1, 10, 1)) +
+      geom_segment(x = 0, y = 0,
+                   xend = 10, yend = 10,
+                   color = "salmon", size=1)+
+      theme_classic()+
+      labs(title = "Complementarios perfectos",
+           subtitle = "Curva de Engel",
+           x = "Bien 1", y = "Bien 2",
+           caption = "") +
+      theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
+            plot.caption = element_text(hjust = 0, face = "bold", size = 10),
+            plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 12),
+            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+    
+    (p1+p3)
+    p2+p4
+    
+  }
+  {
+  #Curva de oferta precio
+    
+    
+    
+  }
+  
+  
 }
 
 
