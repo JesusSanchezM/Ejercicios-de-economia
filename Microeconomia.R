@@ -442,24 +442,24 @@ p1 + p2 / p3
   m2 <- 80
   m3 <- 60
 
-  x1 <- c(1,2,3,4,5,6,7,8,9,10)
+  x1 <- c(1:10)
   x2_m1 <- (m1-p1*x1)/p2
   x2_m2 <- (m2-p1*x1)/p2
   x2_m3 <- (m3-p1*x1)/p2
   
   utilidad <- data.frame(x1_u=x1)
-  r <- x1*x2
+  r <- x1*x2_m1
   for (i in r) {
-    a <- i / x1
+    a <- i / (x1)
     col_name <- paste("utilidad_", i, sep = "")
     utilidad <- cbind(utilidad, a)
     colnames(utilidad)[ncol(utilidad)] <- col_name
   }
-  utilidad <- utilidad[1:6]
-
+  
+  utilidad <- utilidad[1:6] #elimino algunas columnas porque tienen nombres repetidos
   data_1 <- data.frame(x1, x2_m1, x2_m2, x2_m3)
   
-  ggplot() + 
+  p1<-ggplot() + 
     geom_line(data=data_1, aes(x=x1, y=x2_m1), color="red", size=1) +
     geom_line(data=data_1, aes(x=x1, y=x2_m2), color="red", size=1)+
     geom_line(data=data_1, aes(x=x1, y=x2_m3), color="red", size=1)+
@@ -472,12 +472,39 @@ p1 + p2 / p3
     geom_line(data = data.frame(x = c(3, 4, 5), y = c(1.5, 2, 2.5)),
               aes(x = x, y = y),
               color = "orange", size=2)+
+    labs(
+      title = "Curva de oferta-renta",
+      subtitle = expression("Función de utilidad =" ~ u == x[1] * x[2]),
+      x = "Bien 1",
+      y = "Bien 2",
+      caption = "Los precios se establecieron en p1= 10 y p2=20. 
+      Los niveles de renta se establecieron en 100, 80 y 60. 
+      Las cantidades del bien 1 y el bien 2 son (1,2,3,4,5,6,7,8,9,10)"
+    ) +
     theme_classic()
-  
     
+  #Curva de Engel
+  # Function for exponential curve
+  exponential_function <- function(x) {
+    return(1000 * exp(0.05 * x))
+  }
+  # Values for x from 10 to 100
+  x_values <- seq(10, 100, by = 1)
+  # Calculate corresponding y values using the exponential function
+  y_values <- exponential_function(x_values)
+  # Create a data frame
+  data <- data.frame(x = x_values, y = y_values)
+  # Plot the exponential curve
+  p2 <- ggplot(data, aes(x, y)) +
+    geom_line(color = "blue", size = 2) +
+    labs(
+      title = "Curva de Engel",
+      x = "Bien 1",
+      y = "Renta"
+    ) +
+    theme_minimal() + theme_classic()
   
-  
-  
+  p1+p2
 
 }
 
