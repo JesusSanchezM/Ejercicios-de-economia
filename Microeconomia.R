@@ -633,7 +633,46 @@ p1 + p2 / p3
   }
   {
   #Curva de oferta precio
+    df_1 <- data.frame(x = (1:10),
+                     y = (1:10))
     
+    p1<- ggplot(df_1, aes(x = x, y = y)) +
+      scale_x_continuous(breaks = seq(1, 10, 1)) +
+      scale_y_continuous(breaks = seq(1, 10, 1)) +
+      geom_point(color="white") +
+      geom_curve(x = 2, y = 8,
+                 xend = 7, yend = 3,
+                 color = "black", size=1) +
+      geom_curve(x = 3, y = 9,
+                 xend = 8, yend = 4,
+                 color = "black", size=1) +
+      geom_curve(x = 1, y = 7,
+               xend = 6, yend = 2,
+               color = "black", size=1) +
+      geom_curve(x = 2, y = 3,
+                 xend = 5.7, yend = 4,
+                 color = "orange", size=2, curvature = 0.2)+
+      geom_segment(x = 0, y = 7.7,
+                   xend = 3.40, yend = 0,
+                   color = "red", size=1)+
+      geom_segment(x = 0, y = 7.2,
+                   xend = 6.4, yend = 0,
+                   color = "red", size=1)+
+      geom_segment(x = 0, y = 7,
+                   xend = 10.5, yend = 0,
+                   color = "red", size=1)+
+      geom_point(aes(x = 2.1, y = 2.95), color = "red", size = 5)+
+      geom_point(aes(x = 4, y = 2.75), color = "blue", size = 5)+
+      geom_point(aes(x = 5.25, y = 3.55), color = "green", size = 5)+
+      labs(
+        title = "Curva de oferta-precio",
+        x = "Bien 1",
+        y = "Bien 2",
+        caption = ""
+      ) +
+      theme_classic()
+    
+    p1
     
     
   }
