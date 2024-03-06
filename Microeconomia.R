@@ -603,7 +603,7 @@ p1 + p2 / p3
       theme_classic()+
       labs(title = "Sustitutos perfectos",
            subtitle = "Curva de Engel",
-           x = "Bien 1", y = "Bien 2",
+           x = "Bien 1", y = "Renta",
            caption = "") +
       theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
             plot.caption = element_text(hjust = 0, face = "bold", size = 10),
@@ -620,7 +620,7 @@ p1 + p2 / p3
       theme_classic()+
       labs(title = "Complementarios perfectos",
            subtitle = "Curva de Engel",
-           x = "Bien 1", y = "Bien 2",
+           x = "Bien 1", y = "Renta",
            caption = "") +
       theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 18),
             plot.caption = element_text(hjust = 0, face = "bold", size = 10),
@@ -679,6 +679,9 @@ p1 + p2 / p3
   
   
 }
+
+
+
 
 
 
