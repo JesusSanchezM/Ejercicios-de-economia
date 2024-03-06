@@ -431,6 +431,59 @@ p3
 p1 + p2 / p3
 }
 
+#Actividad 5
+{
+  #funcion u=(x1)^2(x2)
+  # restriccion presupuestaria p1x1+p2x2=m
+  
+  p1 <- 10
+  p2 <- 20
+  m1 <- 100
+  m2 <- 80
+  m3 <- 60
+
+  x1 <- c(1,2,3,4,5,6,7,8,9,10)
+  x2_m1 <- (m1-p1*x1)/p2
+  x2_m2 <- (m2-p1*x1)/p2
+  x2_m3 <- (m3-p1*x1)/p2
+  
+  utilidad <- data.frame(x1_u=x1)
+  r <- x1*x2
+  for (i in r) {
+    a <- i / x1
+    col_name <- paste("utilidad_", i, sep = "")
+    utilidad <- cbind(utilidad, a)
+    colnames(utilidad)[ncol(utilidad)] <- col_name
+  }
+  utilidad <- utilidad[1:6]
+
+  data_1 <- data.frame(x1, x2_m1, x2_m2, x2_m3)
+  
+  ggplot() + 
+    geom_line(data=data_1, aes(x=x1, y=x2_m1), color="red", size=1) +
+    geom_line(data=data_1, aes(x=x1, y=x2_m2), color="red", size=1)+
+    geom_line(data=data_1, aes(x=x1, y=x2_m3), color="red", size=1)+
+    geom_line(data=utilidad, aes(x=x1_u, y=utilidad_4.5), size=1)+
+    geom_line(data=utilidad, aes(x=x1_u, y=utilidad_12.5), size=1)+
+    geom_line(data=utilidad, aes(x=x1_u, y=utilidad_8), size=1)+
+    geom_point(aes(x = 3, y = 1.5), color = "red", size = 5)+
+    geom_point(aes(x = 4, y = 2), color = "blue", size = 5)+
+    geom_point(aes(x = 5, y = 2.5), color = "green", size = 5)+
+    geom_line(data = data.frame(x = c(3, 4, 5), y = c(1.5, 2, 2.5)),
+              aes(x = x, y = y),
+              color = "orange", size=2)+
+    theme_classic()
+  
+    
+  
+  
+  
+
+}
+
+
+
+
 
 
 
