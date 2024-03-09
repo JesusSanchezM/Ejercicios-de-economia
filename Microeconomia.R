@@ -687,8 +687,10 @@ p1 + p2 / p3
   q <- c(140, 114,86,70,63,54,45,39,33,29)
   q1 <- seq(200, 20, -20)
   data_1 <- data.frame(p,q,q1)
-  data_1 <- mutate(data_1, e=c(NA, round((abs(diff(q1))*p[2:10])/(abs(diff(p))*q1[2:10]), 2)))
-  data_1 <- mutate(data_1, e_1=c(NA, round((abs(diff(q))*p[2:10])/(abs(diff(p))*q[2:10]), 2)))
+  data_1 <- mutate(data_1, e_q1=c(NA, round((abs(diff(q1))*p[2:10])/(abs(diff(p))*q1[2:10]), 2)))
+  data_1 <- mutate(data_1, e_1_q=c(NA, round((abs(diff(q))*p[2:10])/(abs(diff(p))*q[2:10]), 2)))
+  data_1 <- mutate(data_1, Diff_q1=c(NA, diff(q1)),
+                   Diff_q=c(NA, diff(q)))
   
   
   p1 <- ggplot(data=data_1) + 
@@ -698,8 +700,8 @@ p1 + p2 / p3
   
   
   p2 <- ggplot(data=data_1) + 
-    geom_line(aes(x=q1, y=e), size=1, color="red")+
-    geom_line(aes(x=q, y=e_1), size=1, color="blue")+
+    geom_line(aes(x=q1, y=e_q1), size=1, color="red")+
+    geom_line(aes(x=q, y=e_1_q), size=1, color="blue")+
     geom_segment(x = 0, y = 1,
                  xend = 200, yend = 1,
                  color = "black", size=1) +
@@ -710,7 +712,7 @@ p1 + p2 / p3
   #DOS FORMAS DE INCLUIR GRAFICAS Y TABLAS 
   #FORMA 1
   {
-  tbl1 <- tableGrob(data_1, theme=ttheme_minimal(), rows=NULL)
+  tbl1 <- tableGrob(data_1, theme=ttheme_gtbw(), rows=NULL)
   
   plot_layout <- 
     "AABB
