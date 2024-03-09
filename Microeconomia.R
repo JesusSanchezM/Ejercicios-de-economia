@@ -4,6 +4,7 @@
 
 library(tidyverse)
 library(kableExtra) #tablas estilizadas
+library(gridExtra) 
 library(patchwork) #Combinar graficos
 
 
@@ -680,10 +681,65 @@ p1 + p2 / p3
   
 }
 
+#Elasticidades
+{
+  p <- c(1:10)
+  q <- c(140, 114,86,70,63,54,45,39,33,29)
+  q1 <- seq(200, 20, -20)
+  data_1 <- data.frame(p,q,q1)
+  data_1 <- mutate(data_1, e=c(NA, round((abs(diff(q1))*p[2:10])/(abs(diff(p))*q1[2:10]), 2)))
+  data_1 <- mutate(data_1, e_1=c(NA, round((abs(diff(q))*p[2:10])/(abs(diff(p))*q[2:10]), 2)))
+  
+  
+  p1 <- ggplot(data=data_1) + 
+    geom_line(data=data_1, aes(x=q, y=p), size=1, color="blue")+
+    geom_line(data=data_1, aes(x=q1, y=p), size=1, color="red")+
+    theme_classic()
+  
+  
+  p2 <- ggplot(data=data_1) + 
+    geom_line(aes(x=q1, y=e), size=1, color="red")+
+    geom_line(aes(x=q, y=e_1), size=1, color="blue")+
+    geom_segment(x = 0, y = 1,
+                 xend = 200, yend = 1,
+                 color = "black", size=1) +
+    theme_classic()
 
-
-
-
+  p1+p2
+  
+  #DOS FORMAS DE INCLUIR GRAFICAS Y TABLAS 
+  #FORMA 1
+  {
+  tbl1 <- tableGrob(data_1, theme=ttheme_minimal(), rows=NULL)
+  
+  plot_layout <- 
+    "AABB
+     AACC"
+  
+  wrap_plots(tbl1, p1, p2, 
+             design = plot_layout)
+  
+  }
+  
+  #FORMA 2
+  {
+  #install.packages("ggpmisc")                         # Install & load ggpmisc package
+  library("ggpmisc")
+  
+  ggp_table <- ggplot() +                             # Create empty plot with table
+    theme_void() +
+    annotate(geom = "table",
+             x = 1,
+             y = 1,
+             label = list(data_1))
+  ggp_table
+  
+  ggp_table + p1/p2 
+  
+  }
+  
+  
+}
 
 
 

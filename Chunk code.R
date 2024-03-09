@@ -109,3 +109,73 @@ p1 + p2
   plot_layout(ncol = 2) 
 
   
+
+  y <- data.frame(x1)
+  
+  for (i in x1) {
+    res <- i * 2
+    col_name <- paste("utilidad_", i, sep = "")
+    y <- cbind(y, res)
+    colnames(y)[ncol(y)] <- col_name
+  }
+  
+  print(y)
+  
+  
+  
+  # Assuming x1 and x2 are vectors or columns in a data frame
+  utilidad <- data.frame(x1_u = x1 * x2)
+  r <- x1*x2
+  
+  for (i in r) {
+    a <- i / x1
+    col_name <- paste("utilidad_", i, sep = "")
+    utilidad <- cbind(utilidad, a)
+    colnames(utilidad)[ncol(utilidad)] <- col_name
+  }
+  utilidad
+  str(utilidad)
+  # Load the ggplot2 library if not already loaded
+  # library(ggplot2)
+  
+  # Plot the data using ggplot2
+  ggplot(data = uti) + 
+    geom_line(aes(y = utilidad_4.5)) +  # Adjust the column name accordingly
+    theme_classic()
+
+  uti <- utilidad[1:4]
+  
+plot(utilidad$x1_u, utilidad$utilidad_4.5, type="l")
+
+
+#------------------------------------------------
+
+
+library(ggplot2)
+
+# Function for exponential curve
+exponential_function <- function(x) {
+  return(1000 * exp(0.05 * x))
+}
+
+# Values for x from 10 to 100
+x_values <- seq(10, 100, by = 1)
+
+# Calculate corresponding y values using the exponential function
+y_values <- exponential_function(x_values)
+
+# Create a data frame
+data <- data.frame(x = x_values, y = y_values)
+
+# Plot the exponential curve
+ggplot(data, aes(x, y)) +
+  geom_line(color = "blue", size = 2) +
+  labs(
+    title = "Exponential Function",
+    x = "X-axis",
+    y = "Y-axis"
+  ) +
+  theme_minimal() + theme_classic()
+
+
+
