@@ -8,6 +8,15 @@ library(gridExtra)
 library(patchwork) #Combinar graficos
 
 
+x <- c(1:10)
+y <- c(21:30)
+juntos <- data.frame(x, y)
+View(juntos)
+str(juntos)
+
+
+
+
 #Actividad 1 
 {
 {
