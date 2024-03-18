@@ -179,3 +179,38 @@ ggplot(data, aes(x, y)) +
 
 
 
+
+
+
+
+
+nombre_archivo <- "datos_ENOE_COMPLETA_1_2018.csv"
+
+write.csv(ENOE_COMPLETA_1_2018, file = nombre_archivo, row.names = FALSE)
+
+ENOE_COMPLETA_1_2018 %>% filter(pos_ocu==1 & eda>=15) %>% 
+  select(eda) %>% count()
+
+
+ENOE_COMPLETA_1_2018 %>% select(pos_ocu) %>% table()
+
+
+install.packages("xlsx")
+library(xlsx)
+library(foreign)
+
+# Luego escribimos el siguiente comando:
+
+write.xlsx(ENOE_COMPLETA_1_2018, "ENOE_COMPLETA_1_2018.xlsx")
+write_excel_csv(ENOE_COMPLETA_1_2018, "ENOE_COMPLETA_1_2018.csv")
+
+write.dta(ENOE_COMPLETA_1_2018, "ENOE_COMPLETA_1_2018.dta")
+library(haven)
+
+# Exportar los datos en formato Stata
+write_dta(ENOE_COMPLETA_1_2018, "ENOE_COMPLETA_1_2018.dta")
+
+
+
+
+
